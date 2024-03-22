@@ -24,7 +24,7 @@ The City of Detroit introduces new categories from time to time and made subsets
 
 <img alt="Top 10 Requests by Zip Codes" src="images/first_and_last.png"/>
 
-Some of these categories have “agency only” in the title, meaning they can only be used by city workers.However, they are also freely available categories for public use.
+Some of these categories have “agency only” in the title, meaning they can only be used by city workers. However, city workers are also freely available categories for intended for general pulic.
 
 ##### Using NLP to understand "DPW DR Coordinator - DPW use only"
 Using unigram NLP to the descriptions, I found that the top 10 keywords are related to debris reporting. This helped include these as part of the debris category.

@@ -33,7 +33,7 @@ Using unigram NLP on the descriptions, I determined that this category is also u
 
 Five categories were selected from the most used categories and aggregated into a general debris category. These total 118,302 requests.
 
-| Issues                                   | Notes                                                                                                              |
+| Request Types                            | Notes                                                                                                              |
 |------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 | DPW - Debris Removal - DPW USE ONLY      | Selected                                                                                                           |
 | DPW - Other environmental - DPW USE ONLY | Not selected. City workers use it for various issues. It is sometimes related to debris, but there's no guarantee. |

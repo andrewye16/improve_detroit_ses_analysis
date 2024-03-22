@@ -7,8 +7,10 @@ Using OLS regression, the analysis found that newly vacant properties are most s
 
 A model using median earnings from the last year and new vacant properties was fitted (Adjusted R<sup>2</sup> 0.613). Higher home values have similar effects (they are also highly correlated with median earnings from the previous year), but median earnings proved to be a better predictor in this model.
 
+For a full, detailed Jupyter notebook walkthrough, please use `analysis.ipynb`.
+
 ## 1. Introduction and Cleaning
-Four datasets were used for this analysis. The Improve Detroit and new vacant properties datasets are from the Detroit open data portal. The Socioeconomic Status dataset was obtained from https://www.unitedstateszipcodes.org/ based on 2020 Census and 2020 American Community Survey. The Zillow Home Value Index (ZHVI) comes from https://www.zillow.com/research/data/.
+Four datasets were used for this analysis. The Improve Detroit and new vacant properties datasets are from the Detroit Open Data Portal (https://data.detroitmi.gov/). The Socioeconomic Status dataset was obtained from https://www.unitedstateszipcodes.org/ based on 2020 Census and 2020 American Community Survey. The Zillow Home Value Index (ZHVI) comes from https://www.zillow.com/research/data/.
 
 ### I. Improve Detroit Dataset
 There are 24 columns in this dataset for 513,460 requests. Each entry provides geographical information, the nature of the request, the description, the timeline of the request being solved by the city, the status of the request, an optional description allowing the reporter to provide more information, the reporting methods, a URL to the platform for more detailed information, a unique ID, and a priority code.
@@ -149,9 +151,33 @@ Due to the data collection methods used by the City of Detroit, it is not possib
 
 ## Appendix
 <img alt="Q-Q Plot" src="images/qqplot.png"/>
-<img alt="Q-Q Plot" src="images/boxplot.png"/>
 <img alt="Q-Q Plot" src="images/corr.png"/>
-<img alt="Q-Q Plot" src="images/season.png"/>
 <img alt="Q-Q Plot" src="images/all_requests.png"/>
+<img alt="Q-Q Plot" src="images/season.png"/>
 <img alt="Q-Q Plot" src="images/heatmap_zip.png"/>
+<img alt="Q-Q Plot" src="images/barchart1.png"/>
+<img alt="Q-Q Plot" src="images/barchart2.png"/>
+<img alt="Q-Q Plot" src="images/barchart3.png"/>
+<table>
+  <tr>
+    <td><img src="viz/pop_zip.png" alt="pop_zip" /></td>
+    <td><img src="viz/ppp_zip.png" alt="ppp_zip" /></td>
+  </tr>
+  <tr>
+    <td><img src="viz/mgr_zip.png" alt="mgr_zip" /></td>
+    <td><img src="viz/mhv_zip.png" alt="mhv_zip" /></td>
+  </tr>
+<tr>
+    <td><img src="viz/pbd_zip.png" alt="mgr_zip" /></td>
+    <td><img src="viz/pgd_zip.png" alt="mhv_zip" /></td>
+  </tr>
+    <tr>
+    <td><img src="viz/nvp_zip.png" alt="mgr_zip" /></td>
+    <td><img src="viz/zvhi_zip.png" alt="mhv_zip" /></td>
+  </tr>
+</table>
+<img alt="Q-Q Plot" src="images/boxplot.png"/>
+<img alt="Q-Q Plot" src="images/boxplot2.png"/>
+<img alt="Q-Q Plot" src="images/boxplot3.png"/>
+
 

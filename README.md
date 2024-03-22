@@ -82,8 +82,8 @@ After visualizing the dataset, I removed 48201 (Midtown) and 48226 (Downtown) fr
 I performed OLS regression on each variable listed earlier.
 
 - Hypotheses:
-  - H<sub>0</sub>: There is no significant effect of having a `lower/higher` value of `variable` on the number of requests per incident in a neighborhood.
-  - H<sub>a</sub>: A `lower/higher` value of `variable` significantly affects the number of requests per incident in a neighborhood
+  - H<sub>0</sub>: There is no significant effect of having a `lower/higher` value of `variable` on the number of requests per resident in a neighborhood.
+  - H<sub>a</sub>: A `lower/higher` value of `variable` significantly affects the number of requests per resident in a neighborhood. 
 
 For the final model, I first conducted a correlation test and VIF test to identify and address potential multicollinearity issues. Then, I utilized an exhaustive search based on Adjusted R<sup>2</sup>
 to select the best fitting model. I also created a Q-Q Plot to check for the normal distribution assumption.
@@ -147,7 +147,7 @@ Kurtosis:                       3.221   Cond. No.                     6.24e+07
 
 **Limitations**
 
-Due to the data collection methods used by the City of Detroit, it is not possible to effectively distinguish between requests submitted by city workers and those made by residents. Therefore, analyzing how residents contribute to the total volume of requests is challenging. Additionally, the focus was solely on debris-related requests, which may overlook potential trends in other types of requests. While median earnings from the previous year showed a strong negative association in decreasing requests per resident, the median household income did not. Future projects should investigate the cause of this discrepancy.
+Due to the data collection methods used by the City of Detroit, it is not possible to effectively distinguish between requests submitted by city workers and those made by residents. Therefore, analyzing how residents contribute to the total volume of requests is challenging. Additionally, the focus was solely on debris-related requests, which may overlook potential trends in other types of requests. While median earnings from the previous year showed a strong negative association in decreasing requests per resident, the median household income did not. Future projects should investigate the cause of this phenomenon.
 
 ## Appendix
 <img alt="Q-Q Plot" src="images/qqplot.png"/>

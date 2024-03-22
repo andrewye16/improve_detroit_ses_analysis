@@ -85,7 +85,7 @@ I performed OLS regression on each variable listed earlier.
   - H<sub>0</sub>: There is no significant effect of having a `lower/higher` value of `variable` on the number of requests per incident in a neighborhood.
   - H<sub>a</sub>: A `lower/higher` value of `variable` significantly affects the number of requests per incident in a neighborhood
 
-For the final model, I first conducted a correlation test and VIF test to identify and address potential multicollinearity issues. Then, I utilized an exhaustive search based on Adjusted R<sup>2<sup/>
+For the final model, I first conducted a correlation test and VIF test to identify and address potential multicollinearity issues. Then, I utilized an exhaustive search based on Adjusted R<sup>2</sup>
 to select the best fitting model. I also conducted a Q-Q Plot to check for potential colinearity issues.
 
 ## 3. Results

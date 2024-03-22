@@ -67,7 +67,7 @@ Here is a map showing the zip code areas covered in the analysis.
 ### III. Vacant Property and Zillow Home Value Index Datasets
 
 The declining Detroit economy resulted in a lot of empty property, and this could be an interesting variable to explore.
-I added this information by using the Google Geocoding API to recover the reported property's zip codes from 2019 to 2024.
+I added this information aftrer using the Google Geocoding API to recover the reported property's zip codes from 2019 to 2024. See `helper\vacant_helper.ipynb` for more.
 
 The Zillow Home Value Index is another measurement of the median home value. I added the latest reported index (01/2024) into the dataset to provide another perspective.
 

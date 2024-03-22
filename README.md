@@ -1,4 +1,4 @@
-# Analyzing Debris Removal Requests and Socialeconomic Status in Detroit Neighborhoods
+# Analyzing How Socioeconomic Status of Detroit Neighborhoods Impacts Debris Removal Requests on the Improve Detroit Platform
 
 ## Executive Summary
 This project analyzes how the overall socioeconomic status impacts the volume of Improve Detroit (similar to 311 in other cities) debris-related requests that residents make in different neighborhoods.

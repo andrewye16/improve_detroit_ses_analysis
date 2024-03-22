@@ -1,37 +1,37 @@
-# Debris Removal Requests in Detroit and Social Economic Status
+# Analyzing Debris Removal Requests and Socialeconomic Status in Detroit Neighborhoods
 
 ## Executive Summary
-This project analyzes how the overall socioeconomic status impacts the volume of Improve Detroit debris-related requests that residents make in different neighborhoods.
+This project analyzes how the overall socioeconomic status impacts the volume of Improve Detroit (similar to 311 in other cities) debris-related requests that residents make in different neighborhoods.
 
-Using OLS regression, the analysis found that newly vacant properties are most strongly associated with requests per resident (the dependent variable). Median earnings from the previous year (2021) and home values (from both the Census Bureau and Zillow) also show a strong negative association with requests per resident. Additionally, the analysis suggests that a higher educational level (defined as the percentage of bachelor’s degree holders) contributes to a decrease in debris-related requests. However, higher gross rent does not impact the number of debris-related incidents, nor does the percentage of poverty.
+Using OLS regression, the analysis found that the number of new vacant properties are most strongly associated with debris removal requests per resident (the dependent variable). Median earnings from the previous year (2021) and median home values (from the Census Bureau and Zillow) also show a strong negative association with requests per resident. Additionally, the analysis suggests that a higher educational level (defined as the percentage of bachelor’s degree holders) contributes to a decrease in debris-related requests. However, higher gross rent does not impact the number of debris-related requests per resident, nor does the percentage of poverty.
 
-A model using median earnings from the last year and new vacant properties was fitted (Adjusted R<sup>2</sup> 0.613). Higher home values have similar effects (they are also highly correlated with median earnings from the previous year), but median earnings proved to be a better predictor in this model.
+A model using median earnings from the last year and new vacant properties was constructed (Adjusted R<sup>2</sup> 0.613). Higher home values have similar effects (they are also highly correlated with median earnings from the previous year), but median earnings proved to be a better predictor in this model.
 
-For a full, detailed Jupyter notebook walkthrough, please use `analysis.ipynb`.
+For a complete, detailed Jupyter notebook walkthrough, please use `analysis.ipynb`.
 
 ## 1. Introduction and Cleaning
 Four datasets were used for this analysis. The Improve Detroit and new vacant properties datasets are from the Detroit Open Data Portal (https://data.detroitmi.gov/). The Socioeconomic Status dataset was obtained from https://www.unitedstateszipcodes.org/ based on 2020 Census and 2020 American Community Survey. The Zillow Home Value Index (ZHVI) comes from https://www.zillow.com/research/data/.
 
 ### I. Improve Detroit Dataset
-There are 24 columns in this dataset for 513,460 requests. Each entry has geographical information, the nature of the request, the description, the timeline of the request being solved by the city, the status of the request, an optional description allowing the reporter to provide more information, the reporting method, a URL to the platform for more detailed information, a unique ID, and a priority code.
+There are 24 columns in this dataset for 513,460 requests. Each request has geographical information, the nature of the request, the description, the timeline of the request being solved by the city, the status of the request, an optional description allowing the reporter to provide more information, the reporting method, a URL to the platform for more detailed information, a unique ID, and a priority code.
 #### i. Extracting Zip Codes and Cleaning using Majority Reported
-Around 99.84% of the requests have a zip code associated with them. However, some entries have wrong zip codes. The City of Detroit assigns an address ID to an individual address. Using a table associating the majority of zip codes reported with that address ID, I fixed the wrong zip codes and added missing zip codes for 3,017 requests. There are still less than 0.15% of requests with missing zip codes, and they were removed from the dataset for this analysis.
+Around 99.84% of the requests have a zip code associated with them. However, some requests have wrong zip codes. The City of Detroit assigns an address ID to an individual address. Using a table associating the majority of zip codes reported with that address ID, I fixed the wrong zip codes and added missing zip codes for 3,017 requests. There are less than 0.15% of requests with missing zip codes after this procedure. These were removed from the dataset for this analysis.
 #### ii. Selecting debris-Related Requests 
-There are 27 different types of requests (categories) in this dataset. I selected debris-related variables from the top 10 most used categories (347,994 or 72.5% of total requests) to analyze.
+There are 27 different types of requests (categories) in this dataset. I selected debris-related categories from the top 10 most used categories (347,994 or 72.5% of total requests) to analyze.
 <img alt="Top 10 Requests" src="images/top10_pie.png"/>
 
 The City of Detroit introduces new categories from time to time and made subsets for better classification, as shown in the chart below.
 
 <img alt="Top 10 Requests by Zip Codes" src="images/first_and_last.png"/>
 
-Some of these categories have “agency only” in the title, meaning they can only be used by city workers. However, city workers are also freely available categories for intended for general pulic.
+Some of these categories have “agency only” in the title, meaning they can only be used by city workers. However, city workers can also use any categories intended for general pulic.
 
 ##### Using NLP to understand "DPW DR Coordinator - DPW use only"
-Using unigram NLP on the descriptions, I determined that this category is also used for debris-related requests.
+Using unigram NLP on the descriptions, I determined that this category is used for debris-related requests as well.
 
 <img alt="Top 10 Requests by Zip Codes" src="images/treemap.png"/>
 
-Five categories were selected from the most used categories and aggregated into a general debris category. These total 118,302 requests.
+Five categories were selected from the most requested categories and aggregated into a general debris category. These total 118,302 requests.
 
 | Request Types                            | Notes                                                                                                              |
 |------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
@@ -48,10 +48,10 @@ Five categories were selected from the most used categories and aggregated into 
 | DPW DR Coordinator - DPW use only        | Selected. Closer examination shows city workers are using them for debris removal.                                 |
 
 ### II. Social Economics Status Dataset
-For the purpose of this project, I focused on educational and income levels from the dataset.
+For the purpose of this project, I focused on educational and income levels.
 I performed cleaning to obtain zip codes that are 1. fully located in Detroit and 2. used in reporting.
 
-These are the variables selected for further analysis. These statistics are based on the 2020 Census and the 2021 American Community Survey.
+These are the variables selected for the project. These statistics are based on the 2020 Census Survey and the 2021 American Community Survey.
 ```python
 ['percent_population_in_poverty',
 'median_earnings_past_year', 'median_household_income',
@@ -66,18 +66,18 @@ Here is a map showing the zip code areas covered in the analysis.
 
 ### III. Vacant Property and Zillow Home Value Index Datasets
 
-The declining Detroit economy resulted in a lot of empty property, and this could be an interesting variable to explore.
-I added this information aftrer using the Google Geocoding API to recover the reported property's zip codes from 2019 to 2024. See `helper\vacant_helper.ipynb` for more.
+The declining Detroit economy resulted in a lot of empty properties, and this could be an interesting variable to explore.
+I added this information aftrer using the Google Geocoding API to recover the reported properties' zip codes from 2019 to 2024. See `helper\vacant_helper.ipynb` for more.
 
 The Zillow Home Value Index is another measurement of the median home value. I added the latest reported index (01/2024) into the dataset to provide another perspective.
 
 ## 2. Methodology
 
-Before performing any analysis, I normalized the debris category by dividing it by the total population in the zip codes to allow for better comparison.
+Before performing any analysis, I normalized the debris category by dividing it by the total population in the zip codes to allow for better comparability.
 
 <img alt="Request per Resident By Zip Codes" src="viz/ipr_zip.png"/>
 
-After visualizing the dataset, I removed 48201 (Midtown) and 48226 (Downtown) from the dataset. Since most of the zip codes in the area are located in suburban areas and the environment in these two zip codes is too different, I identified them as outliers for the rest of the neighborhood.
+After visualizing the dataset, I removed 48201 (Midtown) and 48226 (Downtown) from the dataset. Since most of the zip codes in the area are located in suburban areas and the urban environment in these two zip codes is too different, I identified them as outliers for the rest of the neighborhood.
 
 I performed OLS regression on each variable listed earlier.
 
@@ -140,14 +140,14 @@ Kurtosis:                       3.221   Cond. No.                     6.24e+07
 
 ## 4. Conclusion
 1. I found a strong positive association between the prevalence of `new_vacant_properties` and the volume of debris-related requests, as indicated by a highly significant p-value (0.0008) and the highest Adjusted R<sup>2</sup> value (0.4443). This could suggest that residents might be using vacant properties as dumping sites.
-2. Moreover, `median_earnings_past_year` and `median_home_value` (or Zillow Home Value Index `2024_zhvi`) also showed strong statistical significance with their respective p-values. Interestingly, `median_household_income` is not statistically significant in predicting the average report per resident and has a negative adjusted R-squared, whereas `median_earnings_past_year` is highly significant.
+2. Moreover, `median_earnings_past_year` and `median_home_value` (or Zillow Home Value Index `2024_zhvi`) also showed strong statistical significance with their respective p-values. Interestingly, `median_household_income` is not statistically significant in predicting the average report per resident and has a negative adjusted R-squared, whereas `median_earnings_past_year` is highly significant. Future projects should investigate the cause of this phenomenon.
 3. Although not as strong, the educational attainment in terms of `percent_bachelors_degree` showed weak statistical significance and positive relationships with request rates, implying that education levels could lead to residents paying more attention to the cleanliness of the environment.
-4. Higher `median_gross_rent` does not impact the number of debris-related incidents, nor does `percent_population_in_poverty`.
-5. Using both `new_vacant_properties` and `median_earnings_past_year`, I obtained a predictive model with an adjusted R2 of 0.613. Several variables I selected had multicollinearity issues and were dropped after correlation and VIF tests.
+4. Higher `median_gross_rent` does not impact the number of debris-related requests per resident, nor does `percent_population_in_poverty`.
+5. Using both `new_vacant_properties` and `median_earnings_past_year`, I obtained a predictive model with an adjusted R<sup>2</sup> of 0.613. Several variables I selected had multicollinearity issues and were dropped after correlation and VIF tests.
 
 **Limitations**
 
-Due to the data collection methods used by the City of Detroit, it is not possible to effectively distinguish between requests submitted by city workers and those made by residents. Therefore, analyzing how residents contribute to the total volume of requests is challenging. Additionally, the focus was solely on debris-related requests, which may overlook potential trends in other types of requests. While median earnings from the previous year showed a strong negative association in decreasing requests per resident, the median household income did not. Future projects should investigate the cause of this phenomenon.
+Due to the data collection methods used by the City of Detroit, it is not possible to effectively distinguish between requests submitted by city workers and those made by residents. Therefore, analyzing how residents contribute to the total volume of requests is challenging. Additionally, the focus was on debris-related requests, which may not represent the trends in other types of requests.
 
 ## Appendix
 <img alt="Q-Q Plot" src="images/qqplot.png"/>
